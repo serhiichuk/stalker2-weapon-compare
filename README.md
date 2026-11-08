@@ -1,5 +1,7 @@
 # S.T.A.L.K.E.R. 2 weapon & upgrade compare
 
+**Live: https://serhiichuk.github.io/stalker2-weapon-compare/**
+
 A static, no-build web page for browsing **every weapon and weapon upgrade in S.T.A.L.K.E.R. 2: Heart of Chornobyl**, built from the game's own config files. It is modelled on the in-game upgrade screen (weapon with part dots, upgrade tree, modules) and on [Stalker2-ArmorCompare](https://github.com/Graybriel/Stalker2-ArmorCompare).
 
 - 105 weapons (81 base game + 24 from PreOrder / Deluxe / Ultimate / Cost of Hope), 568 upgrades.
@@ -11,7 +13,7 @@ A static, no-build web page for browsing **every weapon and weapon upgrade in S.
 ## Run it
 
 ```
-cd site
+cd docs
 python -m http.server 8000
 ```
 
@@ -21,8 +23,8 @@ Open <http://localhost:8000>. It does not work from `file://` (the page loads JS
 
 | Path | What |
 |---|---|
-| `site/` | The page: `index.html`, `css/`, `js/model.js` (dependency + stat model), `js/app.js` (UI), `data/*.json` (generated), `assets/` (icons, see below), `README.md` (data format and model caveats) |
-| `tools/` | Decoder and build scripts that generate `site/data/*.json` from the game files |
+| `docs/` | The page: `index.html`, `css/`, `js/model.js` (dependency + stat model), `js/app.js` (UI), `data/*.json` (generated), `assets/` (icons, see below), `README.md` (data format and model caveats) |
+| `tools/` | Decoder and build scripts that generate `docs/data/*.json` from the game files |
 | `tools/icons_reference/` | The icon-extraction / mapping scripts, kept for reference (not path-cleaned) |
 
 ## Regenerating the data after a game patch
@@ -38,11 +40,11 @@ The game keeps this data in `.cfg.bin` files inside its `.pak` archives (Oodle-c
    repak unpack -i "Stalker2/Content/GameLite/DLCGameData" -o work/gamedata_dlc/pakchunk102 "<game>/Stalker2/Content/Paks/pakchunk102-Windows.pak"
    repak unpack -i "Stalker2/Content/GameLite/DLCGameData" -o work/gamedata_dlc/pakchunk104 "<game>/Stalker2/Content/Paks/pakchunk104-Windows.pak"
    ```
-2. `python -I tools/build.py` (writes `site/data/weapons.json` and `upgrades.json`).
+2. `python -I tools/build.py` (writes `docs/data/weapons.json` and `upgrades.json`).
 
 Layer order is base, PreOrder, Deluxe, Ultimate, DLC1; in the October data the DLC layers only add weapons and never change base stats.
 
-## Caveats (see `site/README.md` for the full list)
+## Caveats (see `docs/README.md` for the full list)
 
 - The mapping from upgrade effect type to weapon stat, and how effects stack (`EFFECT_MAP` in `js/model.js`), is **inferred**, not read from the engine. The raw effect list is exact; the computed deltas are indicative.
 - Not modelled: `Interchangeable` upgrades (33 pairs), blueprint / skill gates, trader discounts, reload and shotgun pellets in DPS.
@@ -51,4 +53,4 @@ Layer order is base, PreOrder, Deluxe, Ultimate, DLC1; in the October data the D
 
 ## Disclaimer
 
-Unofficial fan project, not affiliated with or endorsed by GSC Game World. S.T.A.L.K.E.R. 2: Heart of Chornobyl, its data, names, text and the images in `site/assets/` are the property of GSC Game World and are included here only to make the tool usable. If you are a rights holder and want them removed, open an issue.
+Unofficial fan project, not affiliated with or endorsed by GSC Game World. S.T.A.L.K.E.R. 2: Heart of Chornobyl, its data, names, text and the images in `docs/assets/` are the property of GSC Game World and are included here only to make the tool usable. If you are a rights holder and want them removed, open an issue.

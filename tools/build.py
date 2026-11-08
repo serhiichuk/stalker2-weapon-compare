@@ -3,8 +3,8 @@ sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import resolve as R
 import layers as LY
 T={k:LY.table(k) for k in ('items','general','chars','attrs','effects','upgrades')}
-OUT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root: contains site/
-DATA=os.path.join(OUT,'site','data'); os.makedirs(DATA,exist_ok=True)
+OUT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # repo root: contains docs/
+DATA=os.path.join(OUT,'docs','data'); os.makedirs(DATA,exist_ok=True)
 D=R.ROOT
 P_ITEM=D+'/ItemPrototypes.cfg.bin'; P_UP=D+'/UpgradePrototypes.cfg.bin'; P_EF=D+'/EffectPrototypes.cfg.bin'
 P_GEN=D+'/WeaponData/WeaponGeneralSetupPrototypes.cfg.bin'; P_CHR=D+'/WeaponData/CharacterWeaponSettingsPrototypes.cfg.bin'
@@ -37,8 +37,8 @@ def pretty(sid):
     return s.replace('_',' ')
 import locres
 LOC={k.split('|',1)[-1]:v for k,v in locres.parse(R.ROOT+'/../../Localization/Game/en/Game.locres').items()}
-SHARED={x for v in json.load(open(os.path.join(OUT,'site','assets','icons.json'))).get('weapons_sharing_icon',{}).values() for x in v}
-ICONS=json.load(open(os.path.join(OUT,'site','assets','icons.json')))
+SHARED={x for v in json.load(open(os.path.join(OUT,'docs','assets','icons.json'))).get('weapons_sharing_icon',{}).values() for x in v}
+ICONS=json.load(open(os.path.join(OUT,'docs','assets','icons.json')))
 chr_roots=set(T['chars'].keys())
 def name_key(sid):
     # The item's own LocalizationSID is the game's name key (e.g. myriflepack_GunKora_HG); fall back to SID-based keys.
@@ -88,7 +88,7 @@ for w in weapons:
     if not w['NameFromGame']:
         for k in ('sid_items_%s_name'%w['GeneralSetup'],'sid_items_%s_name'%par):
             if k in LOC: w['Name']=LOC[k]+(' (variant)' if k.endswith(str(par)+'_name') else ''); break
-    if not os.path.exists(os.path.join(OUT,'site',w['Icon'])) and par in byid and os.path.exists(os.path.join(OUT,'site',byid[par]['Icon'])): w['Icon']=byid[par]['Icon']; w['IconFromParent']=True
+    if not os.path.exists(os.path.join(OUT,'docs',w['Icon'])) and par in byid and os.path.exists(os.path.join(OUT,'docs',byid[par]['Icon'])): w['Icon']=byid[par]['Icon']; w['IconFromParent']=True
 print(len(weapons),'weapons')
 up_ids=sorted({u for w in weapons for u in w['UpgradeList']})
 efcache={}
