@@ -1,0 +1,11 @@
+work/
+pylib/
+__pycache__/
+*.pyc
+*.bak
+*.bak2
+*.bak3
+.DS_Store
+Thumbs.db
+decoded/
+dlc_weapons.json

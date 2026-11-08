@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>S.T.A.L.K.E.R. 2 Weapon Compare</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>STALKER 2 Weapon &amp; Upgrade Compare</h1>
+  <p class="muted">Data decoded from the game's own config tables (pakchunk0, patch of Oct 27). Includes hidden parameters. See README.md for caveats.</p>
+  <div class="toolbar">
+    <input id="weaponSearch" type="search" placeholder="filter weapons...">
+    <span id="srcBox" title="Include weapons from each content pack"></span>
+    <select id="classFilter"><option value="all">All classes</option></select>
+    <button id="swap" class="ghost" type="button">Swap A/B</button>
+    <button id="copyAB" class="ghost" type="button">Copy A to B</button>
+    <button id="share" class="ghost" type="button">Copy share link</button>
+    <span id="shareMsg" class="muted"></span>
+  </div>
+</header>
+<main>
+  <section class="panels">
+    <div class="panel" id="panel-A"></div>
+    <div class="panel" id="panel-B"></div>
+  </section>
+  <section>
+    <div class="toolbar">
+      <h2>Stats</h2>
+      <select id="showFilter">
+        <option value="all">All fields</option>
+        <option value="key">Key stats only</option>
+        <option value="changed">Changed by upgrades</option>
+        <option value="ui">UI-visible only</option>
+        <option value="hidden">Hidden only</option>
+      </select>
+      <input id="fieldSearch" type="search" placeholder="search field name...">
+      <span class="legend"><span class="badge b-ui">UI</span> shown in game
+        <span class="badge b-hid">hidden</span> not shown
+        <span class="badge b-der">calc</span> computed here</span>
+    </div>
+    <div id="compare" class="tablewrap"></div>
+  </section>
+</main>
+<footer class="muted"><span id="locStatus"></span></footer>
+<script src="js/model.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
